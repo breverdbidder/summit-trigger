@@ -61,7 +61,10 @@ export async function GET(req: NextRequest) {
     target_repo,
     target_workflow,
     priority,
-    state: 'pending',
+    state: 'queued',
+
+
+      
     dispatch_inputs,
     attempt_number: 0,
     max_attempts: 3,
