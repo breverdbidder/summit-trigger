@@ -1,0 +1,39 @@
+name: hello-world
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message to echo'
+        required: false
+        default: 'Hello from Claude chat via summit-trigger!'
+      task:
+        description: 'Task identifier'
+        required: false
+        default: 'test_dispatch'
+      county:
+        description: 'County (optional, for testing parameter passing)'
+        required: false
+        default: ''
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print dispatch info
+        run: |
+          echo "::notice::🚀 Workflow dispatched from summit-trigger Vercel endpoint"
+          echo "Message: ${{ github.event.inputs.message }}"
+          echo "Task:    ${{ github.event.inputs.task }}"
+          echo "County:  ${{ github.event.inputs.county }}"
+          echo "Actor:   ${{ github.actor }}"
+          echo "Time:    $(date -u +%FT%TZ)"
+
+      - name: All inputs as JSON
+        run: |
+          cat <<EOF
+          ${{ toJson(github.event.inputs) }}
+          EOF
+
+      - name: Done
+        run: echo "✅ Hello world complete"
