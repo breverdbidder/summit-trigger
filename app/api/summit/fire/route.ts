@@ -52,8 +52,6 @@ export async function GET(req: NextRequest) {
       task_type: task,
       task_spec: payload,
       priority: 'high',
-      dispatched_by: 'summit_fire_endpoint',
-      source: 'summit-trigger/api/summit/fire',
     }]),
   });
 
